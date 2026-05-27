@@ -1,166 +1,1169 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Madify</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HistPath – Menelusuri Jejak Sejarah Islam Secara Interaktif</title>
+    <style>
+        /* ============================================================
+       CSS VARIABLES – Ganti warna di sini untuk ubah tema website
+    ============================================================ */
+        :root {
+            --color-primary: #15803D;
+            --color-secondary: #166534;
+            --color-accent: #F59E0B;
+            --color-bg: #F9FAFB;
+            --color-bg-card: #FFFFFF;
+            --color-bg-dark: #14532D;
+            --color-text: #111827;
+            --color-text-muted: #6B7280;
+            --color-text-light: #FFFFFF;
+            --color-border: #E5E7EB;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, .10);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, .14);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --max-width: 1100px;
+            --nav-height: 68px;
+            --transition: 0.25s ease;
+        }
+
+        /* ============================================================
+       RESET & BASE
+    ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.65;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ============================================================
+       CONTAINER
+    ============================================================ */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+       NAVBAR
+    ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: var(--color-bg-card);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: box-shadow var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--color-text);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span {
+            color: var(--color-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-link {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: color var(--transition), background var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-primary);
+            background: rgba(21, 128, 61, 0.08);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-text);
+            border-radius: 2px;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ============================================================
+       TOMBOL
+    ============================================================ */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-secondary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            color: #1a1a1a;
+            font-size: 1.05rem;
+            padding: 14px 36px;
+        }
+
+        .btn-accent:hover {
+            background: #d97706;
+            color: #fff;
+        }
+
+        /* ============================================================
+       BADGE & LABEL
+    ============================================================ */
+        .badge {
+            display: inline-block;
+            background: rgba(21, 128, 61, 0.1);
+            color: var(--color-primary);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-label.light {
+            color: var(--color-accent);
+        }
+
+        /* ============================================================
+       SECTION UMUM
+    ============================================================ */
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 56px;
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            color: var(--color-text);
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .section-title.left {
+            text-align: left;
+        }
+
+        .section-desc {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+       CARD
+    ============================================================ */
+        .card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        /* ============================================================
+       HERO
+    ============================================================ */
+        .hero {
+            padding-top: calc(var(--nav-height) + 60px);
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 40%, #f9fafb 100%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 900;
+            color: var(--color-primary);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .hero-desc {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .mockup-img,
+        .screenshot-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .img-fallback {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--color-border);
+            border-radius: var(--radius-lg);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hero-fallback {
+            height: 400px;
+        }
+
+        .solusi-fallback {
+            height: 380px;
+        }
+
+        .fallback-icon {
+            font-size: 3rem;
+        }
+
+        /* ============================================================
+       MASALAH
+    ============================================================ */
+        .masalah {
+            background: var(--color-bg);
+        }
+
+        .masalah-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .masalah-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text);
+        }
+
+        .masalah-card p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .target-pengguna {
+            margin-top: 40px;
+            text-align: center;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 18px 28px;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .target-label {
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .target-text {
+            color: var(--color-text-muted);
+        }
+
+        /* ============================================================
+       SOLUSI
+    ============================================================ */
+        .solusi {
+            background: var(--color-bg-card);
+        }
+
+        .solusi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .solusi-penjelasan {
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .solusi-cara {
+            color: var(--color-text-muted);
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+
+        .manfaat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .manfaat-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 0.95rem;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .manfaat-icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ============================================================
+       FITUR
+    ============================================================ */
+        .fitur {
+            background: var(--color-bg);
+        }
+
+        .fitur-icon-wrap {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(21, 128, 61, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .fitur-icon {
+            font-size: 1.6rem;
+        }
+
+        .fitur-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text);
+        }
+
+        .fitur-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+       AKSES
+    ============================================================ */
+        .akses {
+            background: var(--color-bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .akses::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .akses-box {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .akses-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            color: var(--color-text-light);
+            margin-bottom: 18px;
+        }
+
+        .akses-desc {
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 580px;
+            margin: 0 auto 36px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .akses-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .akses-note {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+       TIM
+    ============================================================ */
+        .tim {
+            background: var(--color-bg);
+        }
+
+        .tim-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .tim-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 32px 24px;
+            text-align: center;
+            width: 200px;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .tim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .foto-wrap {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 16px;
+            border: 3px solid var(--color-primary);
+            background: var(--color-border);
+            position: relative;
+        }
+
+        .foto-profil {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .foto-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .tim-nama {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+
+        .tim-peran {
+            font-size: 0.82rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+       FOOTER
+    ============================================================ */
+        .footer {
+            background: var(--color-text);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 48px 0 28px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-logo span {
+            color: var(--color-accent);
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* ============================================================
+       ANIMASI SCROLL
+    ============================================================ */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================
+       RESPONSIVE – MOBILE
+    ============================================================ */
+        @media (max-width: 900px) {
+            .card-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                background: var(--color-bg-card);
+                flex-direction: column;
+                padding: 20px 24px;
+                border-top: 1px solid var(--color-border);
+                box-shadow: var(--shadow-md);
+                gap: 4px;
+                display: none;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+                border-radius: var(--radius-sm);
+                width: 100%;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .mockup-img,
+            .screenshot-img {
+                height: 260px;
+            }
+
+            .hero-fallback,
+            .solusi-fallback {
+                height: 260px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .solusi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .card-grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<header class="navbar">
-    <div class="container nav-container">
-        <h2 class="logo">Madify</h2>
-
-        <nav id="navMenu">
-            <a href="#hero">Beranda</a>
-            <a href="#masalah">Masalah</a>
-            <a href="#solusi">Solusi</a>
-            <a href="#fitur">Fitur</a>
-            <a href="#akses">Akses</a>
-            <a href="#tim">Tim</a>
-        </nav>
-
-        <div class="hamburger" id="hamburger">☰</div>
-    </div>
-</header>
-
-<!-- HERO -->
-<section id="hero" class="hero container fade">
-    <div class="hero-text">
-        <h1>Madify</h1>
-        <p class="tagline">Memahami Hukum Mad Dengan Tepat</p>
-        <p>
-            Aplikasi pembelajaran tajwid interaktif berbasis Android untuk membantu siswa memahami hukum mad secara sistematis, menarik, dan mudah.
-        </p>
-        <a href="#akses" class="btn">Mulai Belajar</a>
-    </div>
-
-    <div class="hero-img">
-        <img src="https://i.ibb.co.com/nstCtN10/img-5.png"
-        alt="Ilustrasi aplikasi Madify"
-        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=fallback>Gambar belum ditambahkan</div>';">
-    </div>
-</section>
-
-<!-- MASALAH -->
-<section id="masalah" class="section container fade">
-    <h2 class="section-title">Permasalahan</h2>
-    <p class="section-desc">
-        Pembelajaran tajwid masih menghadapi berbagai kendala dalam memahami hukum mad.
-    </p>
-
-    <div class="card-grid">
-        <div class="card hover">
-            <p>Metode pembelajaran masih konvensional dan kurang interaktif.</p>
-        </div>
-        <div class="card hover">
-            <p>Keterbatasan media audio pelafalan yang tepat.</p>
-        </div>
-        <div class="card hover">
-            <p>Kurangnya evaluasi digital yang memberikan umpan balik.</p>
-        </div>
-    </div>
-</section>
-
-<!-- SOLUSI -->
-<section id="solusi" class="section container fade">
-    <h2 class="section-title">Solusi</h2>
-
-    <div class="two-col">
-        <div>
-            <p>
-                Madify hadir sebagai solusi pembelajaran tajwid berbasis Android yang interaktif dan sistematis.
-            </p>
-            <ul class="list">
-                <li>Materi mudah dipahami</li>
-                <li>Audio pelafalan akurat</li>
-                <li>Kuis interaktif</li>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#beranda" class="nav-logo">Hist<span>Path</span></a>
+            <button class="hamburger" id="hamburger" aria-label="Buka menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#beranda" class="nav-link">Beranda</a></li>
+                <li><a href="#masalah" class="nav-link">Masalah</a></li>
+                <li><a href="#solusi" class="nav-link">Solusi</a></li>
+                <li><a href="#fitur" class="nav-link">Fitur</a></li>
+                <li><a href="#akses" class="nav-link">Akses</a></li>
+                <li><a href="#tim" class="nav-link">Tim</a></li>
             </ul>
         </div>
+    </nav>
 
-        <div>
-            <img src="https://i.ibb.co.com/nstCtN10/img-5.png"
-            alt="Screenshot aplikasi"
-            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=fallback>Gambar belum ditambahkan</div>';">
+    <!-- HERO -->
+    <section class="hero" id="beranda">
+        <div class="container hero-grid">
+            <div class="hero-text animate-on-scroll">
+                <span class="badge">Aplikasi Pembelajaran Android</span>
+                <h1 class="hero-title">HistPath</h1>
+                <p class="hero-tagline">Menelusuri Jejak Sejarah Islam Secara Interaktif</p>
+                <p class="hero-desc">
+                    HistPath adalah aplikasi pembelajaran berbasis Android yang dirancang untuk membantu
+                    peserta didik SMP/MTs memahami sejarah Islam, khususnya masa Khulafaur Rasyidin,
+                    secara sistematis dan interaktif.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://kodular.app/HBX-FRH" class="btn btn-primary" target="_blank"
+                        rel="noopener">Download Aplikasi</a>
+                    <a href="#fitur" class="btn btn-outline">Lihat Fitur</a>
+                </div>
+            </div>
+            <div class="hero-image animate-on-scroll">
+                <!-- Ganti src="" dengan link gambar mockup aplikasi -->
+                <img src="1.jpeg" alt="Ilustrasi aplikasi HistPath" class="mockup-img" data-fallback="true" />
+                <div class="img-fallback hero-fallback" style="display:none;">
+                    <div class="fallback-icon">📱</div>
+                    <p>Mockup Aplikasi HistPath</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- FITUR -->
-<section id="fitur" class="section container fade">
-    <h2 class="section-title">Fitur Unggulan</h2>
-
-    <div class="card-grid">
-        <div class="card hover">
-            <h3>Materi Terstruktur</h3>
-            <p>Materi disusun bertahap dan sistematis.</p>
+    <!-- MASALAH -->
+    <section class="section masalah" id="masalah">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Latar Belakang</span>
+                <h2 class="section-title">Kurangnya Media Interaktif dalam Pembelajaran Sejarah Islam</h2>
+                <p class="section-desc">
+                    Pembelajaran sejarah Islam, khususnya masa Khulafaur Rasyidin, masih didominasi metode
+                    konvensional yang kurang mampu menarik minat dan memudahkan pemahaman peserta didik.
+                </p>
+            </div>
+            <div class="card-grid-3 animate-on-scroll">
+                <div class="card masalah-card">
+                    <div class="card-icon">📚</div>
+                    <h3>Metode Konvensional</h3>
+                    <p>Materi sejarah disampaikan secara naratif melalui ceramah dan buku teks sehingga kurang menarik
+                        bagi siswa.</p>
+                </div>
+                <div class="card masalah-card">
+                    <div class="card-icon">🔗</div>
+                    <h3>Sulit Memahami Alur</h3>
+                    <p>Peserta didik kesulitan memahami alur peristiwa, tokoh, dan keterkaitan antar konsep sejarah
+                        Islam.</p>
+                </div>
+                <div class="card masalah-card">
+                    <div class="card-icon">📲</div>
+                    <h3>Teknologi Belum Optimal</h3>
+                    <p>Pemanfaatan teknologi digital dalam pembelajaran PAI masih belum optimal dan kurang interaktif.
+                    </p>
+                </div>
+            </div>
+            <div class="target-pengguna animate-on-scroll">
+                <span class="target-label">🎯 Target Pengguna:</span>
+                <span class="target-text">Peserta didik SMP/MTs kelas VIII serta guru Pendidikan Agama Islam</span>
+            </div>
         </div>
-        <div class="card hover">
-            <h3>Audio Pelafalan</h3>
-            <p>Membantu memahami panjang pendek bacaan.</p>
+    </section>
+
+    <!-- SOLUSI -->
+    <section class="section solusi" id="solusi">
+        <div class="container solusi-grid">
+            <div class="solusi-image animate-on-scroll">
+                <!-- Ganti src="" dengan link screenshot aplikasi -->
+                <img src="1.jpeg" alt="Tampilan antarmuka aplikasi HistPath" class="screenshot-img"
+                    data-fallback="true" />
+                <div class="img-fallback solusi-fallback" style="display:none;">
+                    <div class="fallback-icon">🖼️</div>
+                    <p>Screenshot Aplikasi HistPath</p>
+                </div>
+            </div>
+            <div class="solusi-text animate-on-scroll">
+                <span class="section-label">Solusi Kami</span>
+                <h2 class="section-title left">HistPath: Aplikasi Pembelajaran Sejarah Islam Interaktif Berbasis Digital
+                </h2>
+                <p class="solusi-penjelasan">
+                    HistPath merupakan aplikasi pembelajaran berbasis Android yang dirancang untuk menyajikan
+                    materi sejarah Khulafaur Rasyidin secara sistematis, visual, dan interaktif melalui
+                    integrasi teknologi digital dan pendekatan gamifikasi.
+                </p>
+                <p class="solusi-cara">
+                    Pengguna dapat mempelajari materi melalui modul interaktif, menelusuri timeline sejarah,
+                    menonton video pembelajaran, serta mengerjakan kuis berbasis permainan untuk menguji
+                    pemahaman secara bertahap.
+                </p>
+                <ul class="manfaat-list">
+                    <li><span class="manfaat-icon">✅</span> Meningkatkan pemahaman siswa terhadap materi sejarah Islam
+                        melalui visualisasi dan interaktivitas.</li>
+                    <li><span class="manfaat-icon">✅</span> Meningkatkan minat dan keterlibatan belajar melalui fitur
+                        gamifikasi seperti kuis dan reward.</li>
+                    <li><span class="manfaat-icon">✅</span> Membantu guru dalam menyampaikan materi secara lebih menarik
+                        dan efektif dengan dukungan teknologi digital.</li>
+                </ul>
+            </div>
         </div>
-        <div class="card hover">
-            <h3>Kuis Interaktif</h3>
-            <p>Latihan dengan umpan balik langsung.</p>
+    </section>
+
+    <!-- FITUR -->
+    <section class="section fitur" id="fitur">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Fitur Unggulan</span>
+                <h2 class="section-title">Fitur Unggulan HistPath</h2>
+                <p class="section-desc">
+                    HistPath menghadirkan berbagai fitur pembelajaran interaktif yang dirancang untuk membantu
+                    siswa memahami sejarah Khulafaur Rasyidin secara lebih mudah, menarik, dan sistematis.
+                </p>
+            </div>
+            <div class="card-grid-4 animate-on-scroll">
+                <div class="card fitur-card">
+                    <div class="fitur-icon-wrap"><span class="fitur-icon">📖</span></div>
+                    <h3>Modul Jejak Khulafaur Rasyidin</h3>
+                    <p>Menyajikan materi pembelajaran dalam bentuk teks dan visual yang membahas biografi, perjuangan,
+                        serta kebijakan para khalifah secara terstruktur.</p>
+                </div>
+                <div class="card fitur-card">
+                    <div class="fitur-icon-wrap"><span class="fitur-icon">⏳</span></div>
+                    <h3>Interactive Timeline</h3>
+                    <p>Menampilkan garis waktu interaktif yang membantu siswa memahami urutan peristiwa sejarah secara
+                        kronologis dan menyeluruh.</p>
+                </div>
+                <div class="card fitur-card">
+                    <div class="fitur-icon-wrap"><span class="fitur-icon">🎮</span></div>
+                    <h3>Gamified Quiz</h3>
+                    <p>Kuis interaktif berbasis permainan dengan sistem poin, nyawa, dan batas waktu untuk menguji
+                        pemahaman siswa dengan cara yang menyenangkan.</p>
+                </div>
+                <div class="card fitur-card">
+                    <div class="fitur-icon-wrap"><span class="fitur-icon">🏆</span></div>
+                    <h3>Sistem Reward & Progress</h3>
+                    <p>Memberikan lencana, poin, dan progress bar untuk memotivasi siswa dalam menyelesaikan materi
+                        pembelajaran hingga tuntas.</p>
+                </div>
+            </div>
         </div>
-        <div class="card hover">
-            <h3>User Friendly</h3>
-            <p>Tampilan sederhana dan mudah digunakan.</p>
+    </section>
+
+    <!-- AKSES -->
+    <section class="section akses" id="akses">
+        <div class="container">
+            <div class="akses-box animate-on-scroll">
+                <span class="section-label light">Coba Sekarang</span>
+                <h2 class="akses-title">Akses dan Coba HistPath</h2>
+                <p class="akses-desc">
+                    Mulai pengalaman belajar sejarah Islam yang interaktif melalui aplikasi HistPath.
+                    Unduh aplikasi dan eksplorasi fitur pembelajaran secara langsung di perangkat Android Anda.
+                </p>
+                <div class="akses-buttons">
+                    <a href="https://kodular.app/HBX-FRH" class="btn btn-accent" target="_blank" rel="noopener">
+                        📥 Download &amp; Mulai Belajar
+                    </a>
+                </div>
+                <p class="akses-note">Tersedia untuk perangkat Android · Gratis</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- AKSES -->
-<section id="akses" class="section highlight fade">
-    <h2>Akses Madify</h2>
-    <p>Mulai pembelajaran sekarang</p>
-    <a href="belajar.html" class="btn large">Mulai Belajar Sekarang</a>
-</section>
+    <!-- TIM -->
+    <section class="section tim" id="tim">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Tentang Kami</span>
+                <h2 class="section-title">Tim Pengembang HistPath</h2>
+                <p class="section-desc">
+                    Tim HistPath merupakan kelompok mahasiswa Program Studi Pendidikan Agama Islam yang
+                    berkolaborasi dalam mengembangkan aplikasi pembelajaran berbasis digital yang inovatif,
+                    interaktif, dan sesuai dengan kebutuhan peserta didik di era teknologi.
+                </p>
+            </div>
+            <div class="tim-grid animate-on-scroll">
 
-<!-- TIM -->
-<section id="tim" class="section container fade">
-    <h2 class="section-title">[GANTI: JUDUL_TIM]</h2>
-    <p class="section-desc">[GANTI: DESKRIPSI_TIM]</p>
+                <div class="tim-card">
+                    <div class="foto-wrap">
+                        <!-- Ganti src="" dengan link foto profil -->
+                        <img src="" alt="Foto Karina Maharani Asti" class="foto-profil" data-fallback="true"
+                            data-nama="KA" />
+                        <div class="foto-fallback" style="display:none;">KA</div>
+                    </div>
+                    <h3 class="tim-nama">Karina Maharani Asti</h3>
+                    <p class="tim-peran">Pengembang Aplikasi</p>
+                </div>
 
-    <div class="card-grid">
-        <div class="card team hover">
-            <img src="https://i.ibb.co.com/NgdR4mbp/spideman.webp" alt="Ruli">
-            <h3>Ruli Maulana</h3>
-            <p>Front-End Developer</p>
+                <div class="tim-card">
+                    <div class="foto-wrap">
+                        <img src="" alt="Foto Nehla Mumtaz Adentia" class="foto-profil" data-fallback="true"
+                            data-nama="NM" />
+                        <div class="foto-fallback" style="display:none;">NM</div>
+                    </div>
+                    <h3 class="tim-nama">Nehla Mumtaz Adentia</h3>
+                    <p class="tim-peran">Design Aplikasi</p>
+                </div>
+
+                <div class="tim-card">
+                    <div class="foto-wrap">
+                        <img src="" alt="Foto Siska Nur Asakinah" class="foto-profil" data-fallback="true"
+                            data-nama="SN" />
+                        <div class="foto-fallback" style="display:none;">SN</div>
+                    </div>
+                    <h3 class="tim-nama">Siska Nur Asakinah</h3>
+                    <p class="tim-peran">Quality Assurance &amp; Testing</p>
+                </div>
+
+                <div class="tim-card">
+                    <div class="foto-wrap">
+                        <img src="" alt="Foto Muhammad Naufal Mubarak" class="foto-profil" data-fallback="true"
+                            data-nama="NM" />
+                        <div class="foto-fallback" style="display:none;">NM</div>
+                    </div>
+                    <h3 class="tim-nama">Muhammad Naufal Mubarak</h3>
+                    <p class="tim-peran">Multimedia &amp; Content Support</p>
+                </div>
+
+                <div class="tim-card">
+                    <div class="foto-wrap">
+                        <img src="" alt="Foto Nurul Afrida" class="foto-profil" data-fallback="true" data-nama="NA" />
+                        <div class="foto-fallback" style="display:none;">NA</div>
+                    </div>
+                    <h3 class="tim-nama">Nurul Afrida</h3>
+                    <p class="tim-peran">Content Developer</p>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <div class="card team hover">
-            <img src="https://i.ibb.co.com/4x1FCFs/superhero-wanita-scarlett-witch-width-800-format-webp.webp" alt="Asyifa">
-            <h3>Asyifa Putri</h3>
-            <p>Front-End Developer</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="footer-logo">Hist<span>Path</span></span>
+                    <p>Media pembelajaran sejarah Islam berbasis digital.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#beranda">Beranda</a>
+                    <a href="#masalah">Masalah</a>
+                    <a href="#solusi">Solusi</a>
+                    <a href="#fitur">Fitur</a>
+                    <a href="#akses">Akses</a>
+                    <a href="#tim">Tim</a>
+                </div>
+            </div>
+            <hr class="footer-divider" />
+            <div class="footer-bottom">
+                <p>©️ 2026 HistPath. Media pembelajaran sejarah Islam berbasis digital.</p>
+                <p>Kelompok 5 – Al-Kahfi &nbsp;|&nbsp; Pendidikan Agama Islam – Universitas Muhammadiyah Yogyakarta
+                    &nbsp;|&nbsp; 2026</p>
+            </div>
         </div>
+    </footer>
 
-        <div class="card team hover">
-            <img src="https://i.ibb.co.com/TxqchZzX/cpten.jpg" alt="Pandu">
-            <h3>Pandu Aji Gama</h3>
-            <p>Back-End Developer</p>
-        </div>
+    <script>
+        // --- Hamburger Menu ---
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('open');
+            navMenu.classList.toggle('open');
+        });
 
-        <div class="card team hover">
-            <img src="https://i.ibb.co.com/DPM3c3qN/wanita-marvel.jpg" alt="Zahwa">
-            <h3>Az-Zahwa Wafiq Nabila</h3>
-            <p>Content Creator</p>
-        </div>
+        // --- Tutup menu saat link diklik ---
+        document.querySelectorAll('.nav-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                hamburger.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        });
 
-        <div class="card team hover">
-            <img src="https://i.ibb.co.com/qFsB3Skq/perempuan.jpg" alt="Atarida">
-            <h3>Atarida Fatma</h3>
-            <p>Media Creator</p>
-        </div>
-    </div>
-</section>
+        // --- Navbar shadow saat scroll ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+            animasiScroll();
+            aktifkanNavLink();
+        });
 
-<footer class="footer">
-    <p>Madify | Pendidikan Agama Islam | 2026</p>
-</footer>
+        // --- Animasi elemen muncul saat scroll ---
+        const elemen = document.querySelectorAll('.animate-on-scroll');
+        function animasiScroll() {
+            elemen.forEach(function (el) {
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        animasiScroll(); // jalankan sekali saat halaman dibuka
 
-<script src="script.js"></script>
+        // --- Active nav link ---
+        const navLinks = document.querySelectorAll('.nav-link');
+        function aktifkanNavLink() {
+            document.querySelectorAll('section[id]').forEach(function (section) {
+                const top = section.offsetTop - 100;
+                const bottom = top + section.offsetHeight;
+                if (window.scrollY >= top && window.scrollY < bottom) {
+                    navLinks.forEach(function (l) { l.classList.remove('active'); });
+                    const active = document.querySelector('.nav-link[href="#' + section.id + '"]');
+                    if (active) active.classList.add('active');
+                }
+            });
+        }
+
+        // --- Fallback gambar gagal dimuat ---
+        document.querySelectorAll('img[data-fallback]').forEach(function (img) {
+            function showFallback() {
+                img.style.display = 'none';
+                const fb = img.parentElement.querySelector('.img-fallback, .foto-fallback');
+                if (fb) fb.style.display = 'flex';
+            }
+            if (!img.src || img.src === window.location.href) { showFallback(); return; }
+            img.addEventListener('error', showFallback);
+        });
+
+        // --- Smooth scroll ---
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
 </body>
+
 </html>
