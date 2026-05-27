@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pembelajaran – Sejarah Khulafaur Rasyidin | HistPath</title>
+  <style>
+    :root {
+      --primary: #15803D;
+      --primary-dark: #166534;
+      --primary-light: rgba(21,128,61,0.08);
+      --accent: #F59E0B;
+      --accent-dark: #D97706;
+      --bg: #F9FAFB;
+      --bg-card: #FFFFFF;
+      --bg-dark: #14532D;
+      --text: #111827;
+      --text-muted: #6B7280;
+      --text-light: #FFFFFF;
+      --border: #E5E7EB;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+      --nav: 64px;
+      --sidebar: 270px;
+      --ease: 0.22s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { padding-left: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav);
+      background: var(--bg-card); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; z-index: 1000; box-shadow: var(--shadow-sm);
+    }
+    .nav-logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -.5px; }
+    .nav-logo span { color: var(--primary); }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: var(--r-sm); font-size: 0.875rem;
+      font-weight: 500; color: var(--text-muted); border: 1px solid var(--border);
+      transition: color var(--ease), border-color var(--ease), background var(--ease);
+    }
+    .nav-back:hover { color: var(--primary); border-color: var(--primary); background: var(--primary-light); }
+
+    /* ── WRAPPER ── */
+    .wrapper { display: flex; padding-top: var(--nav); min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar); min-width: var(--sidebar);
+      background: var(--bg-card); border-right: 1px solid var(--border);
+      position: sticky; top: var(--nav); height: calc(100vh - var(--nav));
+      overflow-y: auto; flex-shrink: 0;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .sb-header { padding: 20px 18px 14px; border-bottom: 1px solid var(--border); }
+    .sb-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-muted); }
+    .sb-title { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-top: 3px; }
+
+    .sb-progress { padding: 12px 18px 14px; border-bottom: 1px solid var(--border); }
+    .prog-row { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 6px; }
+    .prog-track { background: var(--border); border-radius: 99px; height: 5px; overflow: hidden; }
+    .prog-fill { height: 100%; background: var(--primary); border-radius: 99px; width: 0%; transition: width .6s ease; }
+
+    .sb-nav { padding: 8px 0 20px; }
+    .bab-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; background: none; border: none; padding: 9px 18px;
+      font-size: 0.82rem; font-weight: 700; color: var(--text); cursor: pointer;
+      text-align: left; transition: background var(--ease), color var(--ease);
+      gap: 8px;
+    }
+    .bab-btn:hover, .bab-btn.open { color: var(--primary); background: var(--primary-light); }
+    .bab-arrow { font-size: 0.6rem; transition: transform var(--ease); flex-shrink: 0; }
+    .bab-btn.open .bab-arrow { transform: rotate(90deg); }
+
+    .sub-list { display: none; flex-direction: column; }
+    .sub-list.open { display: flex; }
+    .sub-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 18px 7px 30px; font-size: 0.8rem; color: var(--text-muted);
+      cursor: pointer; border-left: 2px solid transparent;
+      transition: color var(--ease), background var(--ease), border-color var(--ease);
+    }
+    .sub-link:hover { color: var(--primary); background: rgba(21,128,61,0.04); }
+    .sub-link.active { color: var(--primary); background: var(--primary-light); border-left-color: var(--primary); font-weight: 600; }
+    .sub-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    /* Mobile sidebar toggle */
+    .sb-toggle { display: none; width: 100%; padding: 13px 18px; background: var(--primary); color: #fff; border: none; font-weight: 700; font-size: 0.875rem; cursor: pointer; text-align: left; }
+    .sb-body { }
+
+    /* ── MAIN CONTENT ── */
+    .main { flex: 1; min-width: 0; padding: 48px 52px; max-width: 860px; }
+
+    /* Page header */
+    .page-header { margin-bottom: 44px; padding-bottom: 28px; border-bottom: 2px solid var(--border); }
+    .page-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--primary-light); color: var(--primary); padding: 5px 14px; border-radius: 99px; font-size: 0.72rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 14px; }
+    .page-title { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; color: var(--text); line-height: 1.25; margin-bottom: 12px; }
+    .page-desc { color: var(--text-muted); font-size: 0.97rem; line-height: 1.8; max-width: 640px; }
+    .page-chips { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    .chip { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); padding: 5px 12px; border-radius: 99px; }
+
+    /* Section / Bab block */
+    .bab { margin-bottom: 72px; scroll-margin-top: 88px; }
+    .bab-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid rgba(21,128,61,0.15); }
+    .bab-num { background: var(--primary); color: #fff; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 700; flex-shrink: 0; }
+    .bab-heading h2 { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
+
+    /* Subbab */
+    .subbab { margin-bottom: 44px; scroll-margin-top: 88px; }
+    .subbab h3 { font-size: 1.02rem; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .subbab h3::before { content: ''; display: block; width: 4px; height: 18px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+
+    /* Sub-heading dalam subbab */
+    .sub-heading { font-size: 0.95rem; font-weight: 700; color: var(--text); margin: 20px 0 10px; }
+
+    /* Paragraf teks */
+    .txt { color: var(--text-muted); line-height: 1.85; margin-bottom: 14px; font-size: 0.95rem; }
+    .txt strong { color: var(--text); }
+    .txt em { font-style: italic; color: var(--text); }
+
+    /* Daftar poin */
+    .poin { display: flex; flex-direction: column; gap: 9px; margin: 14px 0 18px; }
+    .poin li { display: flex; gap: 10px; align-items: flex-start; color: var(--text-muted); font-size: 0.93rem; line-height: 1.7; }
+    .poin li strong { color: var(--text); }
+    .poin-num { display: flex; flex-direction: column; gap: 9px; margin: 14px 0 18px; counter-reset: poin; }
+    .poin-num li { display: flex; gap: 10px; align-items: flex-start; color: var(--text-muted); font-size: 0.93rem; line-height: 1.7; counter-increment: poin; }
+    .poin-num li::before { content: counter(poin) "."; font-weight: 700; color: var(--primary); flex-shrink: 0; min-width: 18px; }
+    .poin-num li strong { color: var(--text); }
+
+    /* Callout / highlight box */
+    .callout { background: rgba(21,128,61,0.07); border-left: 4px solid var(--primary); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 14px 18px; margin: 18px 0; font-size: 0.92rem; color: var(--text); line-height: 1.75; }
+    .callout-warn { background: rgba(245,158,11,0.08); border-left-color: var(--accent); }
+    .callout-info { background: rgba(59,130,246,0.07); border-left-color: #3B82F6; }
+
+    /* Info card grid (biografi, dll) */
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0; }
+    .info-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md); padding: 16px; }
+    .info-card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+    .info-card-val { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+
+    /* Tag list */
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .tag { background: var(--primary-light); color: var(--primary); padding: 5px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 600; }
+    .tag-accent { background: rgba(245,158,11,0.12); color: #92400E; }
+
+    /* Divider */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    /* ── MEDIA EMBEDS ── */
+    .media-wrap { margin: 22px 0; }
+    .media-label { font-size: 0.72rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .media-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--accent); border-radius: 2px; }
+
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; border-radius: var(--r-md); overflow: hidden; background: #111; box-shadow: var(--shadow-md); }
+    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    .game-wrap { border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; height: 520px; box-shadow: var(--shadow-sm); }
+    .game-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* External link button */
+    .ext-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: var(--r-md); font-weight: 600; font-size: 0.875rem;
+      background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+      cursor: pointer; transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+      margin: 6px 6px 6px 0;
+    }
+    .ext-btn:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-1px); color: var(--primary); }
+    .ext-btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .ext-btn.primary:hover { background: var(--primary-dark); color: #fff; }
+    .ext-btn.accent { background: var(--accent); color: #1a1a1a; border-color: var(--accent); }
+    .ext-btn.accent:hover { background: var(--accent-dark); color: #fff; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+
+    /* ── KUIS INLINE ── */
+    .kuis-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin: 24px 0; box-shadow: var(--shadow-sm); }
+    .kuis-header { background: var(--primary); color: #fff; padding: 16px 24px; display: flex; align-items: center; gap: 10px; }
+    .kuis-header h4 { font-size: 1rem; font-weight: 700; }
+    .kuis-header span { font-size: 0.8rem; opacity: .8; margin-left: auto; }
+    .kuis-body { padding: 0; }
+
+    .soal { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+    .soal:last-child { border-bottom: none; }
+    .soal-num { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 6px; }
+    .soal-q { font-weight: 700; color: var(--text); margin-bottom: 14px; font-size: 0.93rem; line-height: 1.6; }
+    .pilihan { display: flex; flex-direction: column; gap: 8px; }
+    .pilihan label {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-radius: var(--r-sm); border: 1px solid var(--border);
+      cursor: pointer; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;
+      transition: border-color var(--ease), background var(--ease);
+    }
+    .pilihan label:hover { border-color: var(--primary); background: var(--primary-light); color: var(--text); }
+    .pilihan input[type="radio"] { margin-top: 2px; accent-color: var(--primary); flex-shrink: 0; }
+    .pilihan label.benar { border-color: #16a34a; background: #f0fdf4; color: #15803d; font-weight: 600; }
+    .pilihan label.salah { border-color: #dc2626; background: #fef2f2; color: #b91c1c; }
+
+    .cek-btn {
+      margin: 14px 0 0; padding: 9px 20px; background: var(--primary); color: #fff;
+      border: none; border-radius: var(--r-sm); font-weight: 700; font-size: 0.85rem;
+      cursor: pointer; transition: background var(--ease);
+    }
+    .cek-btn:hover { background: var(--primary-dark); }
+    .feedback { margin-top: 10px; font-size: 0.85rem; font-weight: 600; display: none; }
+    .feedback.benar { color: #15803d; }
+    .feedback.salah { color: #b91c1c; }
+
+    /* Skor box */
+    .skor-box { display: none; margin: 20px 24px; padding: 16px 20px; border-radius: var(--r-md); background: var(--bg); border: 1px solid var(--border); text-align: center; }
+    .skor-angka { font-size: 2rem; font-weight: 800; color: var(--primary); }
+    .skor-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+    /* ── STUDI KASUS ── */
+    .kasus-box { background: linear-gradient(135deg, rgba(21,128,61,0.05), rgba(245,158,11,0.05)); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; margin: 24px 0; }
+    .kasus-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 12px; }
+    .kasus-skenario { background: var(--bg-card); border-radius: var(--r-md); padding: 16px 18px; margin-bottom: 16px; border: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; }
+    .kasus-pertanyaan { display: flex; flex-direction: column; gap: 10px; }
+    .kasus-p { display: flex; gap: 10px; font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+    .kasus-p-num { background: var(--accent); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 56px; padding-top: 28px; border-top: 2px solid var(--border); flex-wrap: wrap; }
+    .bnav-btn { display: flex; flex-direction: column; gap: 3px; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--bg-card); cursor: pointer; transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease); flex: 1; min-width: 130px; max-width: 240px; }
+    .bnav-btn:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+    .bnav-btn.right { text-align: right; }
+    .bnav-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+    .bnav-title { font-size: 0.85rem; font-weight: 700; color: var(--primary); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) { .main { padding: 32px 28px; } .info-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      .wrapper { flex-direction: column; }
+      .sidebar { width: 100%; min-width: unset; position: relative; top: 0; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .sb-toggle { display: block; }
+      .sb-body { display: none; }
+      .sb-body.open { display: block; }
+      .main { padding: 24px 18px; }
+      .bnav-btn { max-width: 100%; }
+      .kuis-header { flex-wrap: wrap; }
+      .kuis-header span { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">Hist<span>Path</span></a>
+  <a href="index.html" class="nav-back">← Kembali ke Beranda</a>
+</nav>
+
+<div class="wrapper">
+
+  <!-- ════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════ -->
+  <aside class="sidebar">
+    <button class="sb-toggle" id="sbToggle">☰ &nbsp;Daftar Materi</button>
+    <div class="sb-body" id="sbBody">
+
+      <div class="sb-header">
+        <div class="sb-eyebrow">Materi Pembelajaran</div>
+        <div class="sb-title">Sejarah Khulafaur Rasyidin</div>
+      </div>
+
+      <div class="sb-progress">
+        <div class="prog-row"><span>Progress</span><span id="progPersen">0%</span></div>
+        <div class="prog-track"><div class="prog-fill" id="progBar"></div></div>
+      </div>
+
+      <nav class="sb-nav">
+
+        <!-- Bab 1 -->
+        <button class="bab-btn open" onclick="toggleBab(this)">Bab 1: Khulafaur Rasyidin <i class="bab-arrow">▶</i></button>
+        <div class="sub-list open">
+          <span class="sub-link active" onclick="goTo('s1-1',this)"><span class="sub-dot"></span>1.1 Pengertian</span>
+          <span class="sub-link" onclick="goTo('s1-2',this)"><span class="sub-dot"></span>1.2 Arti Rasyidin</span>
+          <span class="sub-link" onclick="goTo('s1-3',this)"><span class="sub-dot"></span>1.3 Wafatnya Nabi</span>
+          <span class="sub-link" onclick="goTo('s1-video',this)"><span class="sub-dot"></span>Video & Game</span>
+        </div>
+
+        <!-- Bab 2 -->
+        <button class="bab-btn" onclick="toggleBab(this)">Bab 2: Abu Bakar Ash-Shiddiq <i class="bab-arrow">▶</i></button>
+        <div class="sub-list">
+          <span class="sub-link" onclick="goTo('s2-bio',this)"><span class="sub-dot"></span>2.1 Biografi</span>
+          <span class="sub-link" onclick="goTo('s2-kepemimpinan',this)"><span class="sub-dot"></span>2.2 Kepemimpinan</span>
+          <span class="sub-link" onclick="goTo('s2-kebijakan',this)"><span class="sub-dot"></span>2.3 Kebijakan</span>
+          <span class="sub-link" onclick="goTo('s2-kuis',this)"><span class="sub-dot"></span>Kuis</span>
+        </div>
+
+        <!-- Bab 3 -->
+        <button class="bab-btn" onclick="toggleBab(this)">Bab 3: Umar bin Khattab <i class="bab-arrow">▶</i></button>
+        <div class="sub-list">
+          <span class="sub-link" onclick="goTo('s3-bio',this)"><span class="sub-dot"></span>3.1 Biografi</span>
+          <span class="sub-link" onclick="goTo('s3-pemerintahan',this)"><span class="sub-dot"></span>3.2 Sistem Pemerintahan</span>
+          <span class="sub-link" onclick="goTo('s3-ekspansi',this)"><span class="sub-dot"></span>3.3 Ekspansi Wilayah</span>
+          <span class="sub-link" onclick="goTo('s3-evaluasi',this)"><span class="sub-dot"></span>Evaluasi</span>
+        </div>
+
+        <!-- Bab 4 -->
+        <button class="bab-btn" onclick="toggleBab(this)">Bab 4: Utsman bin Affan <i class="bab-arrow">▶</i></button>
+        <div class="sub-list">
+          <span class="sub-link" onclick="goTo('s4-bio',this)"><span class="sub-dot"></span>4.1 Biografi</span>
+          <span class="sub-link" onclick="goTo('s4-kebijakan',this)"><span class="sub-dot"></span>4.2 Kebijakan</span>
+          <span class="sub-link" onclick="goTo('s4-keteladanan',this)"><span class="sub-dot"></span>4.3 Keteladanan</span>
+          <span class="sub-link" onclick="goTo('s4-kuis',this)"><span class="sub-dot"></span>Kuis & Media</span>
+        </div>
+
+        <!-- Bab 5 -->
+        <button class="bab-btn" onclick="toggleBab(this)">Bab 5: Ali bin Abi Thalib <i class="bab-arrow">▶</i></button>
+        <div class="sub-list">
+          <span class="sub-link" onclick="goTo('s5-bio',this)"><span class="sub-dot"></span>5.1 Biografi & Gelar</span>
+          <span class="sub-link" onclick="goTo('s5-konflik',this)"><span class="sub-dot"></span>5.2 Konflik Internal</span>
+          <span class="sub-link" onclick="goTo('s5-kuis',this)"><span class="sub-dot"></span>Kuis & Video</span>
+        </div>
+
+      </nav>
+    </div>
+  </aside>
+
+  <!-- ════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════ -->
+  <main class="main">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-badge">📚 Materi Pembelajaran</div>
+      <h1 class="page-title">Sejarah Khulafaur Rasyidin</h1>
+      <p class="page-desc">Pelajari biografi, kepemimpinan, kebijakan, dan nilai keteladanan para khalifah secara sistematis dan interaktif. Selesaikan setiap bab untuk meningkatkan pemahamanmu.</p>
+      <div class="page-chips">
+        <span class="chip">🎓 Kelas VIII SMP/MTs</span>
+        <span class="chip">📖 5 Bab · Mata Pelajaran PAI</span>
+        <span class="chip">🕌 HistPath – Kelompok 5 Al-Kahfi</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         BAB 1: KHULAFAUR RASYIDIN
+    ═══════════════════════════════════════ -->
+    <div class="bab" id="bab-1">
+      <div class="bab-heading">
+        <div class="bab-num">1</div>
+        <h2>Khulafaur Rasyidin – Bahan Bacaan</h2>
+      </div>
+
+      <!-- 1.1 -->
+      <div class="subbab" id="s1-1">
+        <h3>A. Pengertian Khulafaur Rasyidin</h3>
+        <p class="txt">Khulafaur Rasyidin adalah para pemimpin umat Islam yang melanjutkan kepemimpinan setelah Nabi Muhammad SAW wafat. Kata <strong>khalifah</strong> sendiri berarti "pengganti" atau "pemimpin".</p>
+        <p class="txt">Setelah Nabi wafat, umat Islam tetap membutuhkan seorang pemimpin untuk mengatur kehidupan masyarakat, menjaga persatuan, serta meneruskan ajaran Islam. Oleh karena itu, dipilihlah para sahabat Nabi yang paling dipercaya untuk menjadi pemimpin.</p>
+
+        <div class="sub-heading">Khulafaur Rasyidin terdiri dari empat sahabat utama:</div>
+        <ul class="poin-num">
+          <li>Abu Bakar Ash-Shiddiq</li>
+          <li>Umar bin Khattab</li>
+          <li>Utsman bin Affan</li>
+          <li>Ali bin Abi Thalib</li>
+        </ul>
+
+        <p class="txt">Masa kepemimpinan mereka disebut sebagai masa yang paling baik dalam sejarah Islam, karena mereka memimpin dengan:</p>
+        <ul class="poin-num">
+          <li>Berpegang pada Al-Qur'an dan Hadis</li>
+          <li>Mengutamakan musyawarah</li>
+          <li>Bersikap adil dan jujur</li>
+          <li>Sederhana dan mengutamakan kepentingan umat</li>
+        </ul>
+      </div>
+
+      <!-- 1.2 -->
+      <div class="subbab" id="s1-2">
+        <h3>B. Arti Rasyidin</h3>
+        <p class="txt">Kata <strong>Rasyidin</strong> berasal dari bahasa Arab, yaitu dari kata <em>Rasyid</em> yang berarti "mendapat petunjuk" atau "berada di jalan yang benar".</p>
+        <p class="txt">Jadi, Khulafaur Rasyidin berarti <strong>para pemimpin yang mendapatkan petunjuk dari Allah SWT</strong> dalam menjalankan tugasnya. Mereka tidak hanya memimpin secara politik, tetapi juga menjadi teladan dalam kehidupan sehari-hari.</p>
+
+        <div class="callout">
+          <strong>Contoh keteladanan mereka:</strong><br>
+          Selalu mengambil keputusan dengan hati-hati dan berdasarkan ajaran Islam · Hidup sederhana meskipun memiliki jabatan tinggi · Selalu mengutamakan kepentingan umat dibandingkan kepentingan pribadi.
+        </div>
+
+        <p class="txt">Karena sifat-sifat inilah, kepemimpinan mereka dijadikan contoh bagi umat Islam hingga sekarang.</p>
+      </div>
+
+      <!-- 1.3 -->
+      <div class="subbab" id="s1-3">
+        <h3>C. Latar Belakang Wafatnya Nabi Muhammad SAW</h3>
+        <p class="txt">Nabi Muhammad SAW wafat pada tahun <strong>632 M</strong> di Kota Madinah. Sebelum wafat, beliau mengalami sakit selama beberapa hari. Wafatnya Nabi menjadi peristiwa yang sangat mengharukan bagi seluruh umat Islam.</p>
+        <p class="txt">Banyak sahabat yang merasa sedih dan bahkan tidak percaya bahwa Nabi telah wafat. Namun, Abu Bakar Ash-Shiddiq kemudian menenangkan umat dengan mengingatkan bahwa Nabi Muhammad SAW adalah manusia biasa, sedangkan Allah SWT tetap hidup selamanya.</p>
+        <p class="txt">Setelah Nabi wafat, muncul masalah besar, yaitu siapa yang akan memimpin umat Islam selanjutnya. Nabi tidak secara langsung menunjuk pengganti beliau, sehingga para sahabat harus bermusyawarah. Akhirnya, dipilihlah <strong>Abu Bakar Ash-Shiddiq</strong> sebagai khalifah pertama.</p>
+
+        <div class="sub-heading">Pemilihan ini bertujuan untuk:</div>
+        <ul class="poin-num">
+          <li>Menjaga persatuan umat Islam</li>
+          <li>Melanjutkan ajaran Islam</li>
+          <li>Mengatur kehidupan masyarakat</li>
+          <li>Menghadapi berbagai tantangan setelah wafatnya Nabi</li>
+        </ul>
+
+        <div class="callout callout-info">
+          Peristiwa ini menjadi awal terbentuknya kepemimpinan Khulafaur Rasyidin yang berlangsung dengan penuh tanggung jawab dan keteladanan.
+        </div>
+      </div>
+
+      <!-- Video & Game Bab 1 -->
+      <div class="subbab" id="s1-video">
+        <h3>Video & Game Pembelajaran</h3>
+        <p class="txt">Agar pemahamanmu semakin jelas dan menarik, yuk lanjutkan dengan menonton video pembelajaran yang telah disediakan! 🎥</p>
+
+        <div class="media-wrap">
+          <div class="media-label">Video Pembelajaran</div>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/OgLkyrZWjK4" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <p class="txt" style="margin-top:24px;">Sekarang saatnya belajar dengan cara yang lebih seru melalui game edukasi! 🎮📖</p>
+        <div class="btn-group">
+          <a href="https://gemini.google.com/share/80b95b9590a2" target="_blank" class="ext-btn accent">🎮 Buka Game Edukasi</a>
+          <a href="https://forms.gle/WWgjtNani7B2cVrx6" target="_blank" class="ext-btn primary">📝 Kerjakan Latihan Soal</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         BAB 2: ABU BAKAR ASH-SHIDDIQ
+    ═══════════════════════════════════════ -->
+    <div class="bab" id="bab-2">
+      <div class="bab-heading">
+        <div class="bab-num">2</div>
+        <h2>Abu Bakar Ash-Shiddiq</h2>
+      </div>
+
+      <!-- 2.1 Biografi -->
+      <div class="subbab" id="s2-bio">
+        <h3>2.1 Biografi Singkat</h3>
+
+        <div class="info-grid">
+          <div class="info-card"><div class="info-card-label">Nama Lengkap</div><div class="info-card-val">Abdullah bin Abi Quhafah</div></div>
+          <div class="info-card"><div class="info-card-label">Lahir</div><div class="info-card-val">Mekah, ± 573 M</div></div>
+          <div class="info-card"><div class="info-card-label">Gelar</div><div class="info-card-val">Ash-Shiddiq</div></div>
+          <div class="info-card"><div class="info-card-label">Masa Khalifah</div><div class="info-card-val">632 – 634 M (±2 tahun)</div></div>
+        </div>
+
+        <p class="txt">Abu Bakar dikenal sebagai sahabat dekat Nabi Muhammad dan termasuk orang pertama yang masuk Islam (<em>assabiqunal awwalun</em>). Ia dikenal sebagai pedagang yang jujur, lembut, dan sangat dipercaya.</p>
+        <p class="txt">Gelar <strong>Ash-Shiddiq</strong> (yang membenarkan) diberikan karena ia langsung membenarkan peristiwa Isra' Mi'raj ketika banyak orang meragukannya.</p>
+
+        <div class="tag-list">
+          <span class="tag">Jujur & Amanah</span>
+          <span class="tag">Lembut namun Tegas</span>
+          <span class="tag">Sederhana</span>
+          <span class="tag">Setia kepada Nabi</span>
+        </div>
+      </div>
+
+      <!-- 2.2 Kepemimpinan -->
+      <div class="subbab" id="s2-kepemimpinan">
+        <h3>2.2 Masa Kepemimpinan</h3>
+        <p class="txt">Abu Bakar menjadi khalifah setelah wafatnya Nabi Muhammad pada tahun <strong>632 M</strong>. Pengangkatannya terjadi melalui musyawarah di Saqifah Bani Sa'idah, yang menunjukkan prinsip awal demokrasi dalam Islam.</p>
+        <p class="txt">Masa kepemimpinannya berlangsung sekitar <strong>2 tahun (632–634 M)</strong>.</p>
+      </div>
+
+      <!-- 2.3 Kebijakan -->
+      <div class="subbab" id="s2-kebijakan">
+        <h3>2.3 Kebijakan & Keteladanan</h3>
+        <ul class="poin">
+          <li>⚔️ <span><strong>Memerangi Kaum Riddah</strong> – Menindak tegas kelompok yang keluar dari Islam dan menolak membayar zakat.</span></li>
+          <li>📖 <span><strong>Pengumpulan Al-Qur'an</strong> – Atas usulan Umar, Abu Bakar memerintahkan pengumpulan ayat-ayat Al-Qur'an menjadi satu mushaf.</span></li>
+          <li>🌍 <span><strong>Ekspansi Wilayah</strong> – Mengirim pasukan ke Syam dan Irak untuk menyebarkan Islam.</span></li>
+          <li>🤝 <span><strong>Menjaga Stabilitas Umat</strong> – Fokus mempertahankan persatuan umat setelah wafatnya Nabi.</span></li>
+        </ul>
+
+        <hr class="divider">
+        <div class="sub-heading">Nilai Keteladanan</div>
+        <ul class="poin">
+          <li>🌟 <span><strong>Keimanan yang kuat</strong> – Tetap teguh dalam situasi krisis</span></li>
+          <li>⚖️ <span><strong>Kepemimpinan yang adil</strong> – Mengutamakan kepentingan umat</span></li>
+          <li>✊ <span><strong>Ketegasan dalam kebenaran</strong> – Tidak kompromi terhadap penyimpangan</span></li>
+          <li>🏡 <span><strong>Kesederhanaan hidup</strong> – Meskipun pemimpin, tetap hidup sederhana</span></li>
+        </ul>
+      </div>
+
+      <!-- Kuis Bab 2 -->
+      <div class="subbab" id="s2-kuis">
+        <h3>Kuis: Abu Bakar Ash-Shiddiq</h3>
+        <p class="txt">Uji pemahamanmu dengan menjawab pertanyaan berikut!</p>
+
+        <div class="kuis-box">
+          <div class="kuis-header">
+            <h4>🧠 Kuis Bab 2</h4>
+            <span id="skor2-label"></span>
+          </div>
+          <div class="kuis-body">
+
+            <div class="soal">
+              <div class="soal-num">Soal 1</div>
+              <div class="soal-q">Siapakah Abu Bakar Ash-Shiddiq dalam sejarah Islam?</div>
+              <div class="pilihan" id="p2-1">
+                <label><input type="radio" name="q2-1" value="A"> A. Nabi terakhir</label>
+                <label><input type="radio" name="q2-1" value="B"> B. Sahabat Nabi dan khalifah pertama</label>
+                <label><input type="radio" name="q2-1" value="C"> C. Panglima perang</label>
+                <label><input type="radio" name="q2-1" value="D"> D. Penulis Al-Qur'an</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-1','B',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-1"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 2</div>
+              <div class="soal-q">Abu Bakar Ash-Shiddiq diangkat menjadi khalifah setelah wafatnya …</div>
+              <div class="pilihan" id="p2-2">
+                <label><input type="radio" name="q2-2" value="A"> A. Umar bin Khattab</label>
+                <label><input type="radio" name="q2-2" value="B"> B. Ali bin Abi Thalib</label>
+                <label><input type="radio" name="q2-2" value="C"> C. Nabi Muhammad SAW</label>
+                <label><input type="radio" name="q2-2" value="D"> D. Utsman bin Affan</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-2','C',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-2"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 3</div>
+              <div class="soal-q">Apa gelar dari Abu Bakar Ash-Shiddiq?</div>
+              <div class="pilihan" id="p2-3">
+                <label><input type="radio" name="q2-3" value="A"> A. Al-Faruq</label>
+                <label><input type="radio" name="q2-3" value="B"> B. Dzulhijjah</label>
+                <label><input type="radio" name="q2-3" value="C"> C. Ash-Shiddiq</label>
+                <label><input type="radio" name="q2-3" value="D"> D. Al-Amin</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-3','C',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-3"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 4</div>
+              <div class="soal-q">Salah satu kebijakan penting Abu Bakar Ash-Shiddiq adalah …</div>
+              <div class="pilihan" id="p2-4">
+                <label><input type="radio" name="q2-4" value="A"> A. Membuat kalender Hijriyah</label>
+                <label><input type="radio" name="q2-4" value="B"> B. Mengumpulkan Al-Qur'an</label>
+                <label><input type="radio" name="q2-4" value="C"> C. Membangun armada laut</label>
+                <label><input type="radio" name="q2-4" value="D"> D. Memindahkan ibu kota</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-4','B',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-4"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 5</div>
+              <div class="soal-q">Perang untuk melawan kaum murtad pada masa Abu Bakar disebut …</div>
+              <div class="pilihan" id="p2-5">
+                <label><input type="radio" name="q2-5" value="A"> A. Perang Badar</label>
+                <label><input type="radio" name="q2-5" value="B"> B. Perang Uhud</label>
+                <label><input type="radio" name="q2-5" value="C"> C. Perang Riddah</label>
+                <label><input type="radio" name="q2-5" value="D"> D. Perang Khandaq</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-5','C',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-5"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 6</div>
+              <div class="soal-q">Sifat utama Abu Bakar Ash-Shiddiq adalah …</div>
+              <div class="pilihan" id="p2-6">
+                <label><input type="radio" name="q2-6" value="A"> A. Keras dan kejam</label>
+                <label><input type="radio" name="q2-6" value="B"> B. Jujur dan amanah</label>
+                <label><input type="radio" name="q2-6" value="C"> C. Sombong dan berkuasa</label>
+                <label><input type="radio" name="q2-6" value="D"> D. Pendendam</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-6','B',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-6"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 7</div>
+              <div class="soal-q">Masa kepemimpinan Abu Bakar Ash-Shiddiq berlangsung selama …</div>
+              <div class="pilihan" id="p2-7">
+                <label><input type="radio" name="q2-7" value="A"> A. 10 tahun</label>
+                <label><input type="radio" name="q2-7" value="B"> B. 2 tahun</label>
+                <label><input type="radio" name="q2-7" value="C"> C. 5 tahun</label>
+                <label><input type="radio" name="q2-7" value="D"> D. 15 tahun</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p2-7','B',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p2-7"></div>
+            </div>
+
+          </div>
+          <div class="skor-box" id="skor-bab2">
+            <div class="skor-angka" id="skor2-val">–</div>
+            <div class="skor-label">Skor Kuis Bab 2</div>
+          </div>
+        </div>
+
+        <div class="media-wrap" style="margin-top:28px;">
+          <div class="media-label">Video Animasi</div>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/vHBFqLSK6KM" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-top:16px;">
+          <a href="https://gemini.google.com/share/18acb58dd2c4" target="_blank" class="ext-btn accent">🎮 Game Bab 2</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         BAB 3: UMAR BIN KHATTAB
+    ═══════════════════════════════════════ -->
+    <div class="bab" id="bab-3">
+      <div class="bab-heading">
+        <div class="bab-num">3</div>
+        <h2>Umar bin Khattab</h2>
+      </div>
+
+      <!-- 3.1 Biografi -->
+      <div class="subbab" id="s3-bio">
+        <h3>3.1 Biografi</h3>
+
+        <div class="info-grid">
+          <div class="info-card"><div class="info-card-label">Nama Lengkap</div><div class="info-card-val">Umar bin Khattab bin Nufail al-Quraisy</div></div>
+          <div class="info-card"><div class="info-card-label">Gelar</div><div class="info-card-val">Al-Faruq</div></div>
+          <div class="info-card"><div class="info-card-label">Masa Khalifah</div><div class="info-card-val">634 – 644 M (±10 tahun)</div></div>
+          <div class="info-card"><div class="info-card-label">Wafat</div><div class="info-card-val">644 M, ditusuk saat salat Subuh</div></div>
+        </div>
+
+        <p class="txt">Umar dikenal sebagai sosok yang kuat, tegas, dan berani. Pada awalnya beliau menentang dakwah Islam, namun setelah masuk Islam, Umar justru menjadi pembela agama yang sangat gigih.</p>
+        <p class="txt">Gelar <strong>Al-Faruq</strong> berarti "pembeda antara yang benar (hak) dan yang salah (batil)". Gelar ini diberikan karena ketegasannya dalam menegakkan keadilan.</p>
+        <p class="txt">Meskipun menjadi pemimpin besar, Umar tetap hidup sederhana dan sangat peduli terhadap rakyatnya. Ia sering turun langsung ke masyarakat untuk memastikan kesejahteraan mereka.</p>
+
+        <div class="tag-list">
+          <span class="tag">Tegas & Adil</span>
+          <span class="tag">Al-Faruq</span>
+          <span class="tag">Sederhana</span>
+          <span class="tag">Inovatif</span>
+        </div>
+      </div>
+
+      <!-- 3.2 Sistem Pemerintahan -->
+      <div class="subbab" id="s3-pemerintahan">
+        <h3>3.2 Sistem Pemerintahan</h3>
+        <p class="txt">Pada masa Umar, sistem pemerintahan Islam mengalami perkembangan yang sangat pesat. Ia melakukan berbagai inovasi dalam bidang pemerintahan, ekonomi, dan administrasi negara.</p>
+
+        <div class="sub-heading">1. Pembentukan Baitul Mal</div>
+        <p class="txt">Baitul Mal adalah lembaga keuangan negara untuk mengelola seluruh harta umat. Sumber pemasukannya meliputi:</p>
+        <ul class="poin-num">
+          <li><strong>Zakat</strong> – kewajiban umat Islam yang mampu</li>
+          <li><strong>Jizyah</strong> – pajak perlindungan bagi non-Muslim</li>
+          <li><strong>Kharaj</strong> – pajak atas tanah pertanian</li>
+          <li><strong>Ghanimah</strong> – harta rampasan perang</li>
+          <li><strong>Fai'</strong> – harta yang diperoleh tanpa peperangan</li>
+        </ul>
+
+        <div class="callout">Dana Baitul Mal digunakan untuk: bantuan fakir miskin & anak yatim · gaji pegawai dan tentara · pembangunan jalan, masjid, dan fasilitas umum · bantuan korban bencana.
+        </div>
+
+        <hr class="divider">
+        <div class="sub-heading">2. Pembagian Wilayah Administrasi</div>
+        <p class="txt">Umar membagi wilayah kekuasaan Islam menjadi beberapa provinsi yang dipimpin oleh gubernur (amir/wali). Prinsip yang diterapkan:</p>
+        <ul class="poin">
+          <li>✅ <span>Selektif dalam memilih pemimpin yang jujur dan kompeten</span></li>
+          <li>✅ <span>Pengawasan ketat agar tidak menyalahgunakan kekuasaan</span></li>
+          <li>✅ <span>Larangan hidup mewah bagi pejabat</span></li>
+          <li>✅ <span>Keterbukaan terhadap kritik dari rakyat</span></li>
+        </ul>
+
+        <hr class="divider">
+        <div class="sub-heading">3. Penetapan Kalender Hijriyah</div>
+        <p class="txt">Umar menetapkan peristiwa hijrah Nabi dari Makkah ke Madinah sebagai awal perhitungan tahun dalam Islam. Kalender Hijriyah menggunakan sistem peredaran bulan (qamariyah) dengan 12 bulan. Manfaatnya:</p>
+        <ul class="poin-num">
+          <li>Menentukan waktu ibadah (Ramadan, haji, zakat)</li>
+          <li>Mempermudah administrasi pemerintahan</li>
+          <li>Menyatukan umat Islam dalam satu sistem waktu</li>
+          <li>Menjadi identitas peradaban Islam</li>
+        </ul>
+      </div>
+
+      <!-- 3.3 Ekspansi Wilayah -->
+      <div class="subbab" id="s3-ekspansi">
+        <h3>3.3 Ekspansi Wilayah</h3>
+        <p class="txt">Pada masa Umar, wilayah kekuasaan Islam meluas hingga ke berbagai kawasan penting dunia. Ekspansi dilakukan bukan hanya untuk memperluas kekuasaan, tetapi juga untuk menyebarkan ajaran Islam dan menegakkan keadilan.</p>
+
+        <div class="callout callout-warn">
+          <strong>Prinsip Ekspansi Umar:</strong> Tidak menyakiti warga sipil · Tidak merusak tempat ibadah · Tidak merusak lingkungan · Mengutamakan perdamaian jika memungkinkan.
+        </div>
+
+        <div class="sub-heading">1. Penaklukan Persia</div>
+        <ul class="poin">
+          <li>⚔️ <span><strong>Perang Qadisiyah (636 M)</strong> – Sa'ad bin Abi Waqqas memimpin pasukan Islam mengalahkan tentara Persia.</span></li>
+          <li>⚔️ <span><strong>Perang Nahawand (642 M)</strong> – "Kemenangan besar" yang menandai runtuhnya Kekaisaran Sassaniyah.</span></li>
+        </ul>
+
+        <div class="sub-heading">2. Penaklukan Syam</div>
+        <ul class="poin">
+          <li>⚔️ <span><strong>Perang Yarmuk (636 M)</strong> – Khalid bin Walid memimpin kemenangan atas Kekaisaran Bizantium.</span></li>
+          <li>🕌 <span>Kota-kota penting seperti Damaskus, Homs, dan Yerusalem berhasil dikuasai.</span></li>
+          <li>🤝 <span>Umar datang langsung menerima penyerahan Yerusalem secara damai.</span></li>
+        </ul>
+
+        <div class="sub-heading">3. Penaklukan Mesir</div>
+        <ul class="poin">
+          <li>🗡️ <span>Dipimpin oleh <strong>Amr bin Ash</strong>, Mesir berhasil ditaklukkan secara bertahap.</span></li>
+          <li>🏛️ <span>Kota Alexandria menjadi pusat penting pemerintahan Islam di Afrika Utara.</span></li>
+        </ul>
+
+        <div class="media-wrap" style="margin-top:24px;">
+          <div class="media-label">Video Animasi Pembelajaran</div>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/4bGjd6E6pCk" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evaluasi Bab 3 -->
+      <div class="subbab" id="s3-evaluasi">
+        <h3>Evaluasi Bab 3</h3>
+
+        <div class="kuis-box">
+          <div class="kuis-header">
+            <h4>📝 Evaluasi Umar bin Khattab</h4>
+          </div>
+          <div class="kuis-body">
+
+            <div class="soal">
+              <div class="soal-num">Soal 1</div>
+              <div class="soal-q">Umar bin Khattab mendapat gelar Al-Faruq yang berarti…</div>
+              <div class="pilihan" id="p3-1">
+                <label><input type="radio" name="q3-1" value="A"> A. Pemimpin yang bijaksana</label>
+                <label><input type="radio" name="q3-1" value="B"> B. Penakluk wilayah</label>
+                <label><input type="radio" name="q3-1" value="C"> C. Pembeda antara yang benar dan yang salah</label>
+                <label><input type="radio" name="q3-1" value="D"> D. Orang yang dermawan</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p3-1','C',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p3-1"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 2</div>
+              <div class="soal-q">Umar bin Khattab menjadi khalifah setelah wafatnya…</div>
+              <div class="pilihan" id="p3-2">
+                <label><input type="radio" name="q3-2" value="A"> A. Ali bin Abi Thalib</label>
+                <label><input type="radio" name="q3-2" value="B"> B. Utsman bin Affan</label>
+                <label><input type="radio" name="q3-2" value="C"> C. Nabi Muhammad SAW</label>
+                <label><input type="radio" name="q3-2" value="D"> D. Abu Bakar Ash-Shiddiq</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p3-2','D',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p3-2"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 3</div>
+              <div class="soal-q">Lembaga yang dibentuk Umar untuk mengelola keuangan negara adalah…</div>
+              <div class="pilihan" id="p3-3">
+                <label><input type="radio" name="q3-3" value="A"> A. Diwan</label>
+                <label><input type="radio" name="q3-3" value="B"> B. Baitul Mal</label>
+                <label><input type="radio" name="q3-3" value="C"> C. Majelis Syura</label>
+                <label><input type="radio" name="q3-3" value="D"> D. Mahkamah</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p3-3','B',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p3-3"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 4</div>
+              <div class="soal-q">Peristiwa yang dijadikan awal penetapan kalender Hijriyah adalah…</div>
+              <div class="pilihan" id="p3-4">
+                <label><input type="radio" name="q3-4" value="A"> A. Kelahiran Nabi Muhammad SAW</label>
+                <label><input type="radio" name="q3-4" value="B"> B. Perang Badar</label>
+                <label><input type="radio" name="q3-4" value="C"> C. Hijrah Nabi dari Makkah ke Madinah</label>
+                <label><input type="radio" name="q3-4" value="D"> D. Fathu Makkah</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p3-4','C',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p3-4"></div>
+            </div>
+
+            <div class="soal">
+              <div class="soal-num">Soal 5</div>
+              <div class="soal-q">Wilayah yang berhasil ditaklukkan pada masa Umar bin Khattab adalah…</div>
+              <div class="pilihan" id="p3-5">
+                <label><input type="radio" name="q3-5" value="A"> A. India</label>
+                <label><input type="radio" name="q3-5" value="B"> B. Cina</label>
+                <label><input type="radio" name="q3-5" value="C"> C. Persia</label>
+                <label><input type="radio" name="q3-5" value="D"> D. Jepang</label>
+              </div>
+              <button class="cek-btn" onclick="cek('p3-5','C',this)">Cek Jawaban</button>
+              <div class="feedback" id="fb-p3-5"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kasus-box" style="margin-top:24px;">
+          <div class="kasus-title">📌 Studi Kasus Mini</div>
+          <div class="kasus-skenario">
+            Kamu adalah seorang pemimpin di sebuah daerah. Suatu hari, kamu mengetahui bahwa ada sebagian rakyatmu yang hidup dalam kesulitan ekonomi, bahkan ada yang kekurangan makanan. Di sisi lain, kamu juga memiliki anggaran daerah yang harus digunakan secara tepat dan tidak boleh disalahgunakan.
+          </div>
+          <div class="kasus-pertanyaan">
+            <div class="kasus-p"><div class="kasus-p-num">1</div><div>Apa langkah pertama yang akan kamu lakukan untuk membantu rakyat tersebut?</div></div>
+            <div class="kasus-p"><div class="kasus-p-num">2</div><div>Bagaimana kamu mengelola anggaran agar tetap adil dan tepat sasaran?</div></div>
+            <div class="kasus-p"><div class="kasus-p-num">3</div><div>Nilai keteladanan apa dari Umar bin Khattab yang bisa kamu terapkan dalam situasi tersebut?</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         BAB 4: UTSMAN BIN AFFAN
+    ═══════════════════════════════════════ -->
+    <div class="bab" id="bab-4">
+      <div class="bab-heading">
+        <div class="bab-num">4</div>
+        <h2>Utsman bin Affan</h2>
+      </div>
+
+      <!-- 4.1 Biografi -->
+      <div class="subbab" id="s4-bio">
+        <h3>4.1 Biografi Singkat</h3>
+
+        <div class="info-grid">
+          <div class="info-card"><div class="info-card-label">Asal</div><div class="info-card-val">Bani Umayyah, Makkah</div></div>
+          <div class="info-card"><div class="info-card-label">Gelar</div><div class="info-card-val">Dzun Nurain (pemilik dua cahaya)</div></div>
+          <div class="info-card"><div class="info-card-label">Masa Khalifah</div><div class="info-card-val">644 – 656 M (±12 tahun)</div></div>
+          <div class="info-card"><div class="info-card-label">Urutan</div><div class="info-card-val">Khalifah Ketiga</div></div>
+        </div>
+
+        <p class="txt">Utsman dikenal sebagai sahabat Nabi yang memiliki akhlak mulia, kaya raya, dan sangat dermawan. Ia adalah pedagang sukses yang jujur dan dihormati masyarakat bahkan sebelum masuk Islam.</p>
+        <p class="txt">Gelar <strong>Dzun Nurain</strong> diberikan karena ia menikahi dua putri Nabi Muhammad ﷺ, yaitu Ruqayyah dan Ummu Kultsum. Tidak ada sahabat lain yang mendapat kehormatan seperti itu.</p>
+
+        <div class="callout">
+          Pada masa awal pemerintahannya, kondisi Islam sangat stabil. Wilayah Islam meluas hingga Afrika Utara, Armenia, dan sebagian Asia Tengah. Namun pada akhir masa pemerintahannya muncul konflik internal yang berujung pada wafatnya Utsman.
+        </div>
+      </div>
+
+      <!-- 4.2 Kebijakan -->
+      <div class="subbab" id="s4-kebijakan">
+        <h3>4.2 Kebijakan Penting</h3>
+
+        <div class="sub-heading">a. Kodifikasi Al-Qur'an</div>
+        <p class="txt">Jasa terbesar Utsman adalah menyusun <strong>Mushaf Utsmani</strong>. Ia membentuk tim yang dipimpin Zaid bin Tsabit untuk menyusun mushaf standar, yang kemudian diperbanyak dan dikirim ke berbagai wilayah. Mushaf ini menjadi dasar Al-Qur'an yang digunakan umat Islam hingga sekarang.</p>
+
+        <div class="sub-heading">b. Perluasan Wilayah Islam</div>
+        <p class="txt">Pasukan Islam berhasil mencapai Armenia, Khurasan, Cyprus, dan Afrika Utara. Utsman juga memperkuat <strong>angkatan laut Islam</strong> sehingga mampu menjaga keamanan jalur perdagangan laut.</p>
+
+        <div class="sub-heading">c. Pembangunan Infrastruktur</div>
+        <p class="txt">Utsman membangun jalan, memperluas masjid, membuat saluran air, dan memperbaiki sarana perdagangan. Salah satu pencapaiannya adalah perluasan <strong>Masjid Nabawi</strong> agar mampu menampung lebih banyak jamaah.</p>
+      </div>
+
+      <!-- 4.3 Keteladanan -->
+      <div class="subbab" id="s4-keteladanan">
+        <h3>4.3 Kepribadian & Keteladanan</h3>
+
+        <ul class="poin">
+          <li>💰 <span><strong>Dermawan</strong> – Menggunakan hartanya untuk membantu perjuangan Islam, termasuk membeli sumur Raumah untuk kepentingan masyarakat.</span></li>
+          <li>🕊️ <span><strong>Lembut dan Santun</strong> – Selalu bersikap lembut, jarang marah, dan mengutamakan perdamaian.</span></li>
+          <li>😊 <span><strong>Pemalu</strong> – Sifat malu yang tinggi membuatnya selalu menjaga perilaku dan perkataan.</span></li>
+          <li>🤲 <span><strong>Gemar Bersedekah</strong> – Mengajarkan pentingnya membantu sesama dengan harta yang dimiliki.</span></li>
+          <li>🛡️ <span><strong>Sabar Menghadapi Ujian</strong> – Tetap bersabar menghadapi fitnah dan pemberontakan di akhir kepemimpinannya.</span></li>
+        </ul>
+
+        <div class="media-wrap" style="margin-top:24px;">
+          <div class="media-label">Video Pembelajaran</div>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/lN3IDfWxsXA" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kuis Bab 4 -->
+      <div class="subbab" id="s4-kuis">
+        <h3>Kuis & Media Bab 4</h3>
+        <div class="btn-group">
+          <a href="https://forms.gle/SzmWooBzZ6uRwUmB9" target="_blank" class="ext-btn primary">📝 Kuis Google Form</a>
+          <a href="https://gemini.google.com/share/b9dae7d7bdfb" target="_blank" class="ext-btn accent">🎮 Game Edukasi</a>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         BAB 5: ALI BIN ABI THALIB
+    ═══════════════════════════════════════ -->
+    <div class="bab" id="bab-5">
+      <div class="bab-heading">
+        <div class="bab-num">5</div>
+        <h2>Ali bin Abi Thalib</h2>
+      </div>
+
+      <!-- 5.1 Biografi & Gelar -->
+      <div class="subbab" id="s5-bio">
+        <h3>5.1 Biografi, Gelar & Kepemimpinan</h3>
+
+        <div class="info-grid">
+          <div class="info-card"><div class="info-card-label">Lahir</div><div class="info-card-val">Di dalam Ka'bah, Makkah</div></div>
+          <div class="info-card"><div class="info-card-label">Gelar</div><div class="info-card-val">Babul Ilmi (Pintu Ilmu)</div></div>
+          <div class="info-card"><div class="info-card-label">Masa Khalifah</div><div class="info-card-val">656 – 661 M</div></div>
+          <div class="info-card"><div class="info-card-label">Urutan</div><div class="info-card-val">Khalifah Keempat</div></div>
+        </div>
+
+        <div class="sub-heading">Masa Kecil & Kedekatan dengan Rasulullah SAW</div>
+        <p class="txt">Ali bin Abi Thalib adalah anak dari paman Nabi Muhammad SAW, yaitu Abu Thalib. Sejak usia 5 tahun, Ali sudah diasuh dan dididik langsung oleh Nabi SAW. Ali juga dicatat sejarah sebagai <strong>laki-laki pertama yang memeluk Islam</strong>.</p>
+        <p class="txt">Salah satu peristiwa paling bersejarah adalah saat Nabi hendak hijrah ke Madinah. Ketika rumah Nabi dikepung musuh, Ali dengan berani bersedia menggantikan posisi tidur Nabi agar beliau bisa pergi dengan selamat.</p>
+
+        <div class="sub-heading">Gelar & Kecerdasan</div>
+        <p class="txt">Rasulullah SAW bersabda: <em>"Saya adalah kota ilmu, dan Ali adalah pintunya."</em> Berkat kecerdasannya, Ali mendapat gelar <strong>Babul Ilmi</strong>. Salah satu jasanya adalah merintis ilmu tata bahasa Arab (Nahwu) agar bacaan Al-Qur'an tetap terjaga.</p>
+        <p class="txt">Ali juga pejuang yang sangat berani di medan perang seperti Perang Badar dan Uhud. Ia dijuluki <strong>"Singa Allah yang Tangguh"</strong> dengan pedang legendanya bernama <strong>Zulfikar</strong>.</p>
+
+        <div class="sub-heading">Kebijakan sebagai Khalifah</div>
+        <p class="txt">Ali menghadapi situasi umat yang terpecah belah. Ia langsung melakukan reformasi dengan memecat pejabat yang melakukan penyelewengan dan memindahkan ibu kota dari Madinah ke <strong>Kufah</strong>.</p>
+        <p class="txt">Dalam bidang ekonomi, Ali menjunjung tinggi keadilan di Baitul Mal. Ia membagikan kekayaan negara secara merata kepada seluruh rakyat tanpa pilih kasih.</p>
+
+        <div class="callout callout-info">
+          <em>"Manusia itu ada dua jenis: saudaramu dalam seagama, atau saudaramu sesama manusia ciptaan Tuhan."</em> — Surat Ali kepada Malik al-Ashtar, gubernur Mesir.
+        </div>
+
+        <div class="tag-list">
+          <span class="tag">Babul Ilmi</span>
+          <span class="tag">Cerdas & Berani</span>
+          <span class="tag">Pejuang Keadilan</span>
+          <span class="tag">Ahli Nahwu</span>
+        </div>
+      </div>
+
+      <!-- 5.2 Konflik Internal -->
+      <div class="subbab" id="s5-konflik">
+        <h3>5.2 Konflik Internal di Masa Kepemimpinan Ali</h3>
+        <p class="txt">Masa kepemimpinan Ali merupakan periode yang penuh tantangan. Situasi umat Islam mengalami ketegangan politik yang hebat setelah wafatnya Khalifah Utsman bin Affan.</p>
+
+        <div class="sub-heading">1. Perang Jamal (Tahun 36 H)</div>
+        <p class="txt">Perang ini bermula dari perbedaan pendapat mengenai prioritas penghukuman pembunuh Khalifah Utsman. Kelompok yang dipimpin <strong>Aisyah RA, Thalhah, dan Zubair bin Awwam</strong> menuntut hukum qishash segera dijatuhkan, sementara Ali berpendapat negara harus distabilkan terlebih dahulu.</p>
+        <p class="txt">Pertempuran pecah di Basra. Peristiwa ini dinamakan <strong>Perang Jamal (Perang Unta)</strong> karena Aisyah RA berada di medan perang menunggang unta dalam sebuah tandu.</p>
+
+        <div class="callout">
+          Meskipun berperang, Ali memberikan instruksi mulia: dilarang menyerang orang yang melarikan diri · dilarang merusak harta benda · dilarang menyakiti wanita. Setelah selesai, Ali mengawal Aisyah RA kembali ke Madinah dengan penuh hormat.
+        </div>
+
+        <div class="sub-heading">2. Perang Siffin & Tahkim (Tahun 37 H)</div>
+        <p class="txt">Konflik ini terjadi antara pasukan Ali melawan pasukan <strong>Muawiyah bin Abu Sufyan</strong> (Gubernur Suriah) yang belum bersedia memberikan baiat kepada Ali karena menuntut balas dendam atas kematian Utsman.</p>
+        <p class="txt">Saat posisi pasukan Muawiyah terdesak, <strong>Amr bin Ash</strong> mengusulkan strategi mengangkat mushaf Al-Qur'an di ujung tombak sebagai ajakan berdamai. Peristiwa ini dikenal dengan <strong>Tahkim (Arbitrase)</strong>.</p>
+        <p class="txt">Ali menerima ajakan damai untuk menghentikan pertumpahan darah. Namun keputusan ini menyebabkan sebagian pengikutnya kecewa dan memisahkan diri, yang kemudian dikenal sebagai golongan <strong>Khawarij</strong>.</p>
+      </div>
+
+      <!-- Kuis & Video Bab 5 -->
+      <div class="subbab" id="s5-kuis">
+        <h3>Kuis & Video Bab 5</h3>
+        <p class="txt">Uji pemahamanmu tentang Ali bin Abi Thalib melalui kuis berikut!</p>
+
+        <div class="btn-group">
+          <a href="https://forms.gle/QeB7wWwgjgdLaRmw8" target="_blank" class="ext-btn primary">📝 Kuis Google Form</a>
+          <a href="https://wayground.com/join/quiz/69fde7b70e0ab0efd0b347ad/start?studentShare=true" target="_blank" class="ext-btn accent">🎮 Kuis Interaktif Wayground</a>
+        </div>
+
+        <div class="media-wrap" style="margin-top:20px;">
+          <div class="media-label">Video Pembelajaran</div>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/JsVXMUur_68" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <div class="bnav-btn" onclick="goTo('bab-1',null)">
+        <span class="bnav-label">← Awal</span>
+        <span class="bnav-title">Bab 1: Khulafaur Rasyidin</span>
+      </div>
+      <div class="bnav-btn right" onclick="goTo('bab-5',null)">
+        <span class="bnav-label">Akhir →</span>
+        <span class="bnav-title">Bab 5: Ali bin Abi Thalib</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // ── Sidebar mobile toggle ──
+  document.getElementById('sbToggle').addEventListener('click', function(){
+    var b = document.getElementById('sbBody');
+    b.classList.toggle('open');
+    this.textContent = b.classList.contains('open') ? '✕  Tutup Materi' : '☰  Daftar Materi';
+  });
+
+  // ── Toggle expand/collapse bab ──
+  function toggleBab(btn){
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  }
+
+  // ── Scroll ke section & tandai aktif ──
+  var visited = new Set();
+  var totalSub = document.querySelectorAll('.sub-link').length;
+
+  function goTo(id, linkEl){
+    var t = document.getElementById(id);
+    if(t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' });
+    if(linkEl){
+      document.querySelectorAll('.sub-link').forEach(function(l){ l.classList.remove('active'); });
+      linkEl.classList.add('active');
+      visited.add(id);
+      updateProgress();
+    }
+    if(window.innerWidth <= 768){
+      document.getElementById('sbBody').classList.remove('open');
+      document.getElementById('sbToggle').textContent = '☰  Daftar Materi';
+    }
+  }
+
+  function updateProgress(){
+    var pct = Math.round((visited.size / totalSub) * 100);
+    document.getElementById('progBar').style.width = pct + '%';
+    document.getElementById('progPersen').textContent = pct + '%';
+  }
+
+  // ── Deteksi scroll untuk update sidebar aktif ──
+  window.addEventListener('scroll', function(){
+    document.querySelectorAll('.subbab[id]').forEach(function(sub){
+      var r = sub.getBoundingClientRect();
+      if(r.top <= 110 && r.bottom >= 110){
+        document.querySelectorAll('.sub-link').forEach(function(l){ l.classList.remove('active'); });
+        var m = document.querySelector('.sub-link[onclick*="\''+sub.id+'\'"]');
+        if(m){ m.classList.add('active'); visited.add(sub.id); updateProgress(); }
+      }
+    });
+  });
+
+  // ── Kuis inline: cek jawaban per soal ──
+  var jawabanBenar = {};
+
+  function cek(grupId, jawaban, btn){
+    var grup = document.getElementById(grupId);
+    if(!grup) return;
+    var sel = grup.querySelector('input[type="radio"]:checked');
+    var fb  = document.getElementById('fb-' + grupId);
+    if(!sel){ if(fb){ fb.style.display='block'; fb.className='feedback salah'; fb.textContent='⚠️ Pilih salah satu jawaban terlebih dahulu.'; } return; }
+
+    var labels = grup.querySelectorAll('label');
+    labels.forEach(function(lbl){ lbl.style.pointerEvents='none'; });
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+
+    var pilihan = sel.value;
+    var benar   = (pilihan === jawaban);
+    if(benar) jawabanBenar[grupId] = true;
+
+    labels.forEach(function(lbl){
+      var inp = lbl.querySelector('input');
+      if(inp.value === jawaban) lbl.classList.add('benar');
+      else if(inp.checked && !benar) lbl.classList.add('salah');
+    });
+
+    if(fb){
+      fb.style.display = 'block';
+      fb.className = 'feedback ' + (benar ? 'benar' : 'salah');
+      fb.textContent = benar ? '✅ Benar! Jawaban kamu tepat.' : '❌ Kurang tepat. Jawaban yang benar sudah ditandai hijau.';
+    }
+  }
+</script>
+</body>
+</html>
